@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainWindow extends Activity implements OnClickListener {
 
@@ -60,33 +61,20 @@ public class MainWindow extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
-             case R.id.newGame:
+            case R.id.newGame: {
                 new Thread(new Runnable() {
                     public void run() {
 
                         try {
-                           /* runOnUiThread(new Runnable() {
-                                public void run() {
-                                    if (isInternetAvailable()) {
-                                        noInternet.setText("");
-                                    } else {
-                                        noInternet.setText("No internet");
-                                    }
-                                }
-                            });*/
-
-
                             final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-
                             final String tmDevice, tmSerial, androidId;
                             tmDevice = "" + tm.getDeviceId();
                             tmSerial = "" + tm.getSimSerialNumber();
                             androidId = "" + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-
                             UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
                             final String deviceId = deviceUuid.toString();
-
 
                             runOnUiThread(new Runnable() {
                                 public void run() {
@@ -100,36 +88,33 @@ public class MainWindow extends Activity implements OnClickListener {
                                 // newString = returnString;
                                 String[] tempId = returnString.split(":");
                                 gameID = tempId[1];
-                                connecting.setGameID(gameID);
+                                gameIdnew = tempId[1];
 
-                             //   gameIdnew = gameID;
                             }
                             in.close();
-                            //gameIdnew = gameID;
-                            textViewGameID.setText(gameID);
-                            /*runOnUiThread(new Runnable() {
-                                public void run() {
-                                    textViewGameID.setText(gameID);
-                                    connecting.setGameID(gameID);
-                                }
-                            });*/
+                            //textViewGameID.setText(gameID);
+                            //textViewGameID.setText(gameID);
+                            //idNew.setText(gameID);
 
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    connecting.setGameID(gameID);
+                                    textViewGameID.setText(gameID);
+                                    gameIdnew = gameID;
+                                }
+                            });
                         } catch (Exception e) {
                             Log.d("Exception", e.toString());
                         }
-
-                  }
-
+                    }
                 }).start();
                 Intent intent = new Intent(this, GameWindow.class);
-                //gameIdnew= textViewGameID.getText().toString();
-                //gameIdnew= textViewGameID.getText().toString();
                 gameIdnew = connecting.getGameID();
                 intent.putExtra(GameWindow.GAMEIDMESSAGE, gameIdnew);
                 idNew.setText(gameIdnew);
                 startActivity(intent);
                 break;
-
+            }
         }
 
 
