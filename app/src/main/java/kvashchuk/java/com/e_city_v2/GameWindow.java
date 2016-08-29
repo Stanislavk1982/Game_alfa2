@@ -100,9 +100,9 @@ final public static String GAMEIDMESSAGE = "gameIDmessage";
                                 }
                             });
 
-                            BufferedReader in = connecting.theConnection(urlplayingGame, inputString);
+                            BufferedReader in = Connecting.theConnection(urlplayingGame, inputString);
 
-                            String returnString = "";
+                            String returnString;
                             while ((returnString = in.readLine()) != null) {
                                 newString = returnString;
                             }
@@ -137,8 +137,8 @@ final public static String GAMEIDMESSAGE = "gameIDmessage";
 
                         try {
                             final String inputString = "GameID:" + gameID + "@Move:I GIVE UP";
-                            BufferedReader in = connecting.theConnection(urlplayingGame, inputString);
-                            String returnString = "";
+                            BufferedReader in = Connecting.theConnection(urlplayingGame, inputString);
+                            String returnString;
                             while ((returnString = in.readLine()) != null) {
                                 newString = returnString;
 

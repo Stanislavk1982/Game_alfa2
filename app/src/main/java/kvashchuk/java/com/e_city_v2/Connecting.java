@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 public class Connecting extends Activity {
     String gameID = "";
+    private static BufferedReader bufferedReader = null;
 
     public String getGameID() {
         return gameID;
@@ -36,7 +37,7 @@ public class Connecting extends Activity {
         this.gameID = gameID;
     }
 
-    public BufferedReader theConnection(String urleGame, String inputString) throws IOException {
+    public static BufferedReader theConnection(String urleGame, String inputString) throws IOException {
         URL url = new URL(urleGame);
         URLConnection connection = url.openConnection();
         Log.d("inputString", inputString);
@@ -44,13 +45,16 @@ public class Connecting extends Activity {
         OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
         out.write(inputString);
         out.close();
-        return new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        if (bufferedReader == null) {
+            bufferedReader =new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        }
+        return bufferedReader;
     }
 
     public String getDeviceId() {
 
-        String deviceId = "";
-        return deviceId;
+
+        return "";
     }
 
     public boolean isInternetAvailable() {

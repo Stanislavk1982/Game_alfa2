@@ -82,7 +82,7 @@ public class MainWindow extends Activity implements OnClickListener {
                                 }
                             });
 
-                            BufferedReader in = connecting.theConnection(urlNewGame, deviceId);
+                            BufferedReader in = Connecting.theConnection(urlNewGame, deviceId);
                             String returnString;
                             while ((returnString = in.readLine()) != null) {
                                 String[] tempId = returnString.split(":");
