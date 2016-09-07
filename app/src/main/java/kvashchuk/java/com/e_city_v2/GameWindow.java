@@ -38,39 +38,49 @@ public class GameWindow extends Activity implements OnClickListener {
     Button toMakeMove;
     Button iGiveUp;
     String newString = null;
-    String gameID = null;
+    String gameID = "000";
     String urlNewGame = "http://mytomcatapp-dergachovda.rhcloud.com/NewGame";
     String urlplayingGame = "http://mytomcatapp-dergachovda.rhcloud.com/move";
     final static String IGIVEUP = "I GIVE UP";
     String lastLetter = "";
-final public static String GAMEIDMESSAGE = "gameIDmessage";
+    final public static String GAMEIDMESSAGE = "gameIDmessage";
     Connecting connecting = new Connecting();
+    PhoneID phoneIDclass = new PhoneID(this);
+    String deviceID;
+    String lastCharFromGoodMove = "Y";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_window);
-        Intent intent = getIntent();
-
-        gameID = intent.getStringExtra(GAMEIDMESSAGE);
-        //gameID = intent.getStringExtra("gameID1");
-
-
         inputValue = (EditText) findViewById(R.id.enterCity);
         inputValueId = (TextView) findViewById(R.id.gameID);
-
-        inputValueId.setText(gameID);
-
         displayMessage = (TextView) findViewById(R.id.displayMessage);
         phoneID = (TextView) findViewById(R.id.phoneID);
         moveServers = (TextView) findViewById(R.id.moveServers);
         noInternet = (TextView) findViewById(R.id.noInternet);
-//inputValue.setText(gameID);
         toMakeMove = (Button) findViewById(R.id.toMakeMove);
         iGiveUp = (Button) findViewById(R.id.iGiveUp);
 
+        //Intent intent = getIntent();
+        //gameID = intent.getStringExtra(GAMEIDMESSAGE);
+        //inputValueId.setText(gameID);
+
         toMakeMove.setOnClickListener(this);
         iGiveUp.setOnClickListener(this);
+
+        deviceID = phoneIDclass.getDeviceId2();
+        try {
+            gameID = connecting.connectingALL(deviceID);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        phoneID.setText(phoneIDclass.getDeviceId2());
+        inputValueId.setText(gameID);
     }
 
     @Override
@@ -100,7 +110,7 @@ final public static String GAMEIDMESSAGE = "gameIDmessage";
                                 }
                             });
 
-                            BufferedReader in = Connecting.theConnection(urlplayingGame, inputString);
+                            BufferedReader in = connecting.theConnection(urlplayingGame, inputString);
 
                             String returnString;
                             while ((returnString = in.readLine()) != null) {
@@ -113,9 +123,18 @@ final public static String GAMEIDMESSAGE = "gameIDmessage";
                                     if (inputString.equals("")) {
                                         inputValue.setText("");
                                     } else {
-                                        moveServers.setText(newString);
+                                        String[] tempCityWithname = newString.split("@");
+                                        String[] temoCity = tempCityWithname[1].split(":");
+                                        String gameMoveServer  = temoCity[1];
+
+                                        //moveServers.setText(newString);
+                                        moveServers.setText(gameMoveServer);
                                         lastLetter = String.valueOf(newString.charAt(newString.length() - 1));
+                                        if (lastLetter.equals("Y")) {
+                                            lastLetter = lastCharFromGoodMove;
+                                        }
                                         inputValue.setText(lastLetter);
+                                        lastCharFromGoodMove = lastLetter;
                                         inputValue.setSelection(1);
 
                                     }
@@ -137,7 +156,7 @@ final public static String GAMEIDMESSAGE = "gameIDmessage";
 
                         try {
                             final String inputString = "GameID:" + gameID + "@Move:I GIVE UP";
-                            BufferedReader in = Connecting.theConnection(urlplayingGame, inputString);
+                            BufferedReader in = connecting.theConnection(urlplayingGame, inputString);
                             String returnString;
                             while ((returnString = in.readLine()) != null) {
                                 newString = returnString;

@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainWindow extends Activity implements OnClickListener {
-
+    PhoneID phoneID = new PhoneID(this);
     Connecting connecting = new Connecting();
     TextView textViewGameID = null;
     TextView noInternet = null;
@@ -68,44 +68,36 @@ public class MainWindow extends Activity implements OnClickListener {
                     public void run() {
 
                         try {
-                            final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-                            final String tmDevice, tmSerial, androidId;
-                            tmDevice = "" + tm.getDeviceId();
-                            tmSerial = "" + tm.getSimSerialNumber();
-                            androidId = "" + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-                            UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
-                            final String deviceId = deviceUuid.toString();
-
+                            final String deviceId = phoneID.getDeviceId2().toString();
                             runOnUiThread(new Runnable() {
                                 public void run() {
                                     textPhoneID.setText(deviceId);
                                 }
                             });
-
-                            BufferedReader in = Connecting.theConnection(urlNewGame, deviceId);
+/*
+                            BufferedReader in = connecting.theConnection(urlNewGame, deviceId);
                             String returnString;
                             while ((returnString = in.readLine()) != null) {
                                 String[] tempId = returnString.split(":");
                                 gameID = tempId[1];
-                                gameIdnew = tempId[1];
+                                connecting.setGameID(gameID);
                             }
                             in.close();
                             runOnUiThread(new Runnable() {
                                 public void run() {
-                                    connecting.setGameID(gameID);
                                     textViewGameID.setText(gameID);
-                                    gameIdnew = gameID;
                                 }
-                            });
+                            }); */
                         } catch (Exception e) {
                             Log.d("Exception", e.toString());
                         }
                     }
                 }).start();
                 Intent intent = new Intent(this, GameWindow.class);
-                gameIdnew = connecting.getGameID();
-                intent.putExtra(GameWindow.GAMEIDMESSAGE, gameIdnew);
-                idNew.setText(gameIdnew);
+                //gameIdnew = connecting.getGameID();
+                //gameIdnew = textPhoneID.getText().toString();
+                //intent.putExtra(GameWindow.GAMEIDMESSAGE, gameIdnew);
+                //idNew.setText(gameID);
                 startActivity(intent);
                 break;
             }

@@ -40,26 +40,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stanislav Kvashchuk"
+        android:text="-----"
         android:id="@+id/kvashchuk"
         android:layout_below="@+id/developers"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="1dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dmitriy Dergachov"
-        android:id="@+id/dergachev"
-        android:layout_below="@+id/developers"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="1dp"
-        />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="_gameID"
+        android:text=""
         android:id="@+id/gameID"
         android:layout_below="@+id/kvashchuk"
         android:layout_alignParentLeft="true"
@@ -69,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="phoneID"
+        android:text=""
         android:id="@+id/phoneID"
         android:layout_below="@+id/gameID"
         android:layout_alignParentLeft="true"
@@ -80,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
+        android:text=""
         android:id="@+id/idNEW"
         android:layout_below="@+id/phoneID"
         android:layout_alignParentLeft="true"
