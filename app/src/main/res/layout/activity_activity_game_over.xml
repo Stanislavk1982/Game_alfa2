@@ -9,4 +9,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kvashchuk.java.com.e_city_v2.ActivityGameOver">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="GAME OVER"
+        android:id="@+id/gameOver"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New game"
+        android:id="@+id/newGame"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/gameOver"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        android:id="@+id/exit"
+        android:layout_below="@id/gameOver"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp" />
 </RelativeLayout>
