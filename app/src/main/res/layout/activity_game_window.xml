@@ -8,88 +8,91 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kvashchuk.java.com.e_city_v2.GameWindow">
+
     <TextView
+        android:id="@+id/displayMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/displayMessage"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="44dp"
         android:text="displayMessage" />
 
     <TextView
+        android:id="@+id/moveServers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/moveServers"
         android:layout_alignLeft="@+id/displayMessage"
         android:layout_below="@+id/displayMessage"
-        android:text="moveServers"
         android:layout_marginTop="35dp"
-        />
+        android:text="moveServers" />
 
 
     <EditText
+        android:id="@+id/enterCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/enterCity"
-        android:hint="EnterCity"
-
         android:layout_alignLeft="@+id/moveServers"
+
         android:layout_below="@+id/moveServers"
         android:layout_marginTop="15dp"
-        />
+        android:hint="EnterCity" />
 
     <Button
+        android:id="@+id/toMakeMove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To make move"
-        android:id="@+id/toMakeMove"
         android:layout_alignLeft="@+id/enterCity"
         android:layout_below="@+id/enterCity"
         android:layout_marginTop="20dp"
-        />
+        android:text="To make move" />
 
     <Button
+        android:id="@+id/iGiveUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I Give Up"
-        android:id="@+id/iGiveUp"
         android:layout_alignRight="@+id/enterCity"
         android:layout_below="@+id/enterCity"
         android:layout_marginTop="20dp"
-        />
+        android:text="I Give Up" />
 
     <TextView
+        android:id="@+id/noInternet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/noInternet"
         android:layout_alignLeft="@+id/toMakeMove"
         android:layout_below="@+id/toMakeMove"
-        android:text="1"
         android:layout_marginTop="10dp"
-        />
+        android:text="1" />
 
     <TextView
+        android:id="@+id/gameID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/gameID"
         android:layout_alignLeft="@+id/iGiveUp"
         android:layout_below="@+id/iGiveUp"
-        android:text="gameID"
         android:layout_marginTop="15dp"
-        />
+        android:text="gameID"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
+        android:id="@+id/phoneID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="phoneID"
-        android:id="@+id/phoneID"
         android:layout_alignLeft="@+id/toMakeMove"
-        android:layout_below="@+id/toMakeMove"
-        android:layout_marginTop="65dp"
+        android:layout_below="@+id/noInternet"
+        android:text="phoneID"
+
         />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listCity"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/phoneID"
+        android:headerDividersEnabled="false" />
 
 
 </RelativeLayout>
